@@ -35,10 +35,12 @@ steps:
     repository: 'api-tempo-dio-bootcamp'
     command: 'buildAndPush'
     Dockerfile: './Dockerfile'
+    tags:  |
+      $(Build.BuildId)
 
 - task: AzureWebAppContainer@1
   inputs:
     azureSubscription: 'my-azure-sc'
     appName: 'api-tempo-dio-bootcamp'
-    imageName: 'myacrdiobootcamp.azurecr.io/api-tempo-dio-bootcamp:latest'
-    containerCommand: ''
+    resourceGroupName: 'az-204-bootcamp-rg'
+    imageName: 'myacrdiobootcamp.azurecr.io/api-tempo-dio-bootcamp:$(Build.BuildId)'
